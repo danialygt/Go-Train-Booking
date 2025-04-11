@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"Bookings/pkg/config"
-	"Bookings/pkg/models"
-	"Bookings/pkg/render"
+	"Bookings/internal/config"
+	"Bookings/internal/forms"
+	"Bookings/internal/models"
+	"Bookings/internal/render"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -51,7 +52,9 @@ func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
 }
 
 func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request) {
