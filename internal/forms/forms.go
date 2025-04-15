@@ -2,6 +2,7 @@ package forms
 
 import (
 	"fmt"
+	"github.com/asaskevich/govalidator"
 	"net/http"
 	"net/url"
 	"strings"
@@ -64,4 +65,11 @@ func (f *Form) MaxLength(field string, length int, r *http.Request) bool {
 		return false
 	}
 	return true
+}
+
+func (f *Form) IsEmail(field string) {
+	if !govalidator.IsEmail(f.Get(field)) {
+		f.Errors.Add(field, "Please enter a valid email address")
+	}
+
 }
